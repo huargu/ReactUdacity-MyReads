@@ -9,7 +9,13 @@ class Book extends Component {
 
   render() {
     const { bookInfo } = this.props;
-    console.log(bookInfo);
+    let authorstring = ''
+    if (bookInfo.authors) {
+      authorstring = bookInfo.authors.join(', ')
+    }
+    else {
+      authorstring = 'Unknown'
+    }
     return (
       <div className="book">
         <div className="book-top">
@@ -24,7 +30,7 @@ class Book extends Component {
           <BookMenu />
         </div>
         <div className="book-title">{bookInfo.title}</div>
-        <div className="book-authors">{bookInfo.authors.join()}</div>
+        <div className="book-authors">{authorstring}</div>
       </div>
     );
   }
