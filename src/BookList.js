@@ -15,7 +15,7 @@ class BookList extends Component {
   };
 
   render() {
-    const { allBooks } = this.props;
+    const { allBooks, onShelfChange } = this.props;
 
     return (
       <div className="list-books">
@@ -32,6 +32,7 @@ class BookList extends Component {
                     shelfBooks={allBooks.filter(
                       (book) => book.shelf === shelf.key 
                     )}
+                    onShelfChange = {onShelfChange}
                   />
                 ))
             }

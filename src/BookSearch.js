@@ -14,7 +14,6 @@ class BookSearch extends Component {
 
 
   updateQuery = (query) => {
-    console.log(query)
     this.setState(() => (
       {
         searchQuery: query
@@ -25,8 +24,8 @@ class BookSearch extends Component {
   
   render() {
     
-    const { searchedBooks } = this.props
-
+    const { searchedBooks, onShelfChange } = this.props
+    console.log(searchedBooks)
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -53,7 +52,7 @@ class BookSearch extends Component {
             {
               searchedBooks.map((searchedBook) => (
                 <li key={searchedBook.id}>
-                  <Book bookInfo={searchedBook} />
+                  <Book bookInfo={searchedBook} onShelfChange={onShelfChange}  />
                 </li>
               ))
             }

@@ -8,7 +8,8 @@ class Book extends Component {
   };
 
   render() {
-    const { bookInfo } = this.props;
+    const { bookInfo, onShelfChange } = this.props;
+
     let authorstring = ''
     if (bookInfo.authors) {
       authorstring = bookInfo.authors.join(', ')
@@ -27,7 +28,7 @@ class Book extends Component {
               backgroundImage: `url(${bookInfo.imageLinks.thumbnail})`,
             }}
           />
-          <BookMenu />
+          <BookMenu book={bookInfo} shelf={bookInfo.shelf} onShelfChange={onShelfChange} />
         </div>
         <div className="book-title">{bookInfo.title}</div>
         <div className="book-authors">{authorstring}</div>
