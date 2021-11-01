@@ -8,21 +8,7 @@ class BookList extends Component {
   };
 
   render() {
-    const filteredBooks = {
-      currentlyReading: [],
-      wantToRead: [],
-      read: [],
-    };
-
     const { allBooks } = this.props;
-
-    filteredBooks.currentlyReading = allBooks.filter(
-      (book) => book.shelf === "currentlyReading"
-    );
-    filteredBooks.wantToRead = allBooks.filter(
-      (book) => book.shelf === "wantToRead"
-    );
-    filteredBooks.read = allBooks.filter((book) => book.shelf === "read");
 
     return (
       <div className="list-books">
@@ -33,13 +19,20 @@ class BookList extends Component {
           <div>
             <Shelf
               shelfTitle="Currently Reading"
-              shelfBooks={filteredBooks.currentlyReading}
+              shelfBooks={allBooks.filter(
+                (book) => book.shelf === "currentlyReading"
+              )}
             />
             <Shelf
               shelfTitle="Want to Read"
-              shelfBooks={filteredBooks.wantToRead}
+              shelfBooks={allBooks.filter(
+                (book) => book.shelf === "wantToRead"
+              )}
             />
-            <Shelf shelfTitle="Read" shelfBooks={filteredBooks.read} />
+            <Shelf
+              shelfTitle="Read"
+              shelfBooks={allBooks.filter((book) => book.shelf === "read")}
+            />
           </div>
         </div>
         <div className="open-search">
