@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Shelf from "./Shelf";
 
+
+const bookShelves = [
+  { key: 'currentlyReading', title: 'Currently Reading', priority: 1},
+  { key: 'wantToRead', title: 'Want to Read', priority: 2},
+  { key: 'read', title: 'Read', priority: 3}
+];
+
 class BookList extends Component {
   static propTypes = {
     allBooks: PropTypes.array.isRequired,
@@ -17,22 +24,17 @@ class BookList extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf
-              shelfTitle="Currently Reading"
-              shelfBooks={allBooks.filter(
-                (book) => book.shelf === "currentlyReading"
-              )}
-            />
-            <Shelf
-              shelfTitle="Want to Read"
-              shelfBooks={allBooks.filter(
-                (book) => book.shelf === "wantToRead"
-              )}
-            />
-            <Shelf
-              shelfTitle="Read"
-              shelfBooks={allBooks.filter((book) => book.shelf === "read")}
-            />
+            {
+              bookShelves.sort((a, b) => (a.priority - b.priority))
+                .map((shelf) => (
+                  <Shelf
+                    shelfTitle = { shelf.title }
+                    shelfBooks={allBooks.filter(
+                      (book) => book.shelf === shelf.key 
+                    )}
+                  />
+                ))
+            }
           </div>
         </div>
         <div className="open-search">
