@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Book from "./Book";
+import PropTypes from 'prop-types'
+import Book from './Book'
 
 class Shelf extends Component {
+
   static propTypes = {
     shelfTitle: PropTypes.string.isRequired,
-    shelfBooks: PropTypes.array.isRequired,
-  };
+    shelfBooks: PropTypes.array.isRequired
+  }
 
   render() {
-    const { shelfTitle, shelfBooks } = this.props;
+
+    const { shelfTitle, shelfBooks } = this.props
 
     return (
       <div className="bookshelf">

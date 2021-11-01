@@ -1,7 +1,8 @@
 import React from "react";
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import BookSearch from './BookSearch'
+import { Route } from "react-router-dom";
+import BookSearch from "./BookSearch";
 import BookList from "./BookList";
 
 class BooksApp extends React.Component {
@@ -13,25 +14,41 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    books: [],
+    searchedBooks: []
   };
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState( () => ({
-        books: books
-      }))
-    })
+      this.setState(() => ({
+        books: books,
+      }));
+    });
+  }
+
+  searchBooks = (query) => {
+
+    console.log('searchbooks')
+    console.log(query)
+    if (query.length > 2) {
+      BooksAPI.search(query).then(books => {
+        this.setState({
+          searchedBooks: books
+        })
+      })
+      console.log(this.state.searchedBooks)
+    }
   }
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <BookSearch />
-        ) : (
-          <BookList allBooks={this.state.books} />
-        )}
+        <Route exact path="/search" render={() => <BookSearch searchedBooks={ this.state.searchedBooks } onSearchBooks={this.searchBooks} />} />
+        <Route
+          exact
+          path="/"
+          render={() => <BookList allBooks={this.state.books} />}
+        />
       </div>
     );
   }
