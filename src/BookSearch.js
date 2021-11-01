@@ -1,9 +1,12 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import Book from './Book'
-import * as BooksAPI from "./BooksAPI"
 
 class BookSearch extends Component {
+
+  static propTypes = {
+    searchedBooks: PropTypes.array.isRequired,
+  };
 
   state = {
     searchQuery: ''
