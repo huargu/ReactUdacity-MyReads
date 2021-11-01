@@ -15,7 +15,7 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false,
     books: [],
-    searchedBooks: []
+    searchedBooks: [],
   };
 
   componentDidMount() {
@@ -27,23 +27,28 @@ class BooksApp extends React.Component {
   }
 
   searchBooks = (query) => {
-
-    console.log('searchbooks')
-    console.log(query)
     if (query.length > 2) {
-      BooksAPI.search(query).then(books => {
+      BooksAPI.search(query).then((books) => {
         this.setState({
-          searchedBooks: books
-        })
-      })
-      console.log(this.state.searchedBooks)
+          searchedBooks: Array.from(books),
+        });
+      });
     }
-  }
+  };
 
   render() {
     return (
       <div className="app">
-        <Route exact path="/search" render={() => <BookSearch searchedBooks={ this.state.searchedBooks } onSearchBooks={this.searchBooks} />} />
+        <Route
+          exact
+          path="/search"
+          render={() => (
+            <BookSearch
+              searchedBooks={this.state.searchedBooks}
+              onSearchBooks={this.searchBooks}
+            />
+          )}
+        />
         <Route
           exact
           path="/"
