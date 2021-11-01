@@ -20,18 +20,20 @@ class BooksApp extends React.Component {
   }
 
   searchBooks = (query) => {
-    if (query.length > 2) {
+    if (query.length > 0) {
       BooksAPI.search(query).then((books) => {
         this.setState({
           searchedBooks: Array.from(books),
         });
       });
+    } else {
+      this.setState({
+        searchedBooks: []
+      })
     }
   };
 
   shelfChange = (book, shelf) => {
-    console.log(book)
-    console.log(shelf)
     BooksAPI.update(book, shelf);
     if (shelf === 'none') {
       this.setState((prevState) => ({
