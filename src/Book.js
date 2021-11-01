@@ -10,19 +10,18 @@ class Book extends Component {
   render() {
     const { bookInfo, onShelfChange } = this.props;
 
-    let authorstring = ''
-    let thumbnail = ''
+    let authorstring = "";
+    let thumbnail = "";
 
     if (bookInfo.authors) {
-      authorstring = bookInfo.authors.join(', ')
-    }
-    else {
-      authorstring = 'Unknown'
+      authorstring = bookInfo.authors.join(", ");
+    } else {
+      authorstring = "Unknown";
     }
 
     if (bookInfo.imageLinks) {
       if (bookInfo.imageLinks.thumbnail) {
-        thumbnail = bookInfo.imageLinks.thumbnail
+        thumbnail = bookInfo.imageLinks.thumbnail;
       }
     }
     return (
@@ -36,7 +35,11 @@ class Book extends Component {
               backgroundImage: `url(${thumbnail})`,
             }}
           />
-          <BookMenu book={bookInfo} shelf={bookInfo.shelf} onShelfChange={onShelfChange} />
+          <BookMenu
+            book={bookInfo}
+            shelf={bookInfo.shelf}
+            onShelfChange={onShelfChange}
+          />
         </div>
         <div className="book-title">{bookInfo.title}</div>
         <div className="book-authors">{authorstring}</div>

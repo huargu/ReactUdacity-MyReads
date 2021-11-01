@@ -28,24 +28,24 @@ class BooksApp extends React.Component {
       });
     } else {
       this.setState({
-        searchedBooks: []
-      })
+        searchedBooks: [],
+      });
     }
   };
 
   shelfChange = (book, shelf) => {
     BooksAPI.update(book, shelf);
-    if (shelf === 'none') {
+    if (shelf === "none") {
       this.setState((prevState) => ({
-        books: prevState.books.filter((b) => (b.id !== book.id))
-      }))
+        books: prevState.books.filter((b) => b.id !== book.id),
+      }));
     } else {
-      book.shelf = shelf
+      book.shelf = shelf;
       this.setState((prevState) => ({
-        books: prevState.books.filter((b) => (b.id !== book.id)).concat(book)
-      }))
+        books: prevState.books.filter((b) => b.id !== book.id).concat(book),
+      }));
     }
-  }
+  };
 
   render() {
     return (
@@ -57,14 +57,19 @@ class BooksApp extends React.Component {
             <BookSearch
               searchedBooks={this.state.searchedBooks}
               onSearchBooks={this.searchBooks}
-              onShelfChange={this.shelfChange} 
+              onShelfChange={this.shelfChange}
             />
           )}
         />
         <Route
           exact
           path="/"
-          render={() => <BookList allBooks={this.state.books} onShelfChange={this.shelfChange} />}
+          render={() => (
+            <BookList
+              allBooks={this.state.books}
+              onShelfChange={this.shelfChange}
+            />
+          )}
         />
       </div>
     );
