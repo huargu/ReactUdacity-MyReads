@@ -27,7 +27,7 @@ class BookList extends Component {
             {
               bookShelves.sort((a, b) => (a.priority - b.priority))
                 .map((shelf) => (
-                  <Shelf
+                  <Shelf key = { shelf.key }
                     shelfTitle = { shelf.title }
                     shelfBooks={allBooks.filter(
                       (book) => book.shelf === shelf.key 
